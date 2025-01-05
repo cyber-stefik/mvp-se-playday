@@ -1,38 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Logo from "./../assets/logo_PlayDay_1.png";
-import { useNavigate } from 'react-router-dom';
 import { auth, firestore } from '../lib/firebase'; // Import firebase auth and firestore
-import { onAuthStateChanged } from 'firebase/auth'; // Import auth state change listener
 import { doc, getDoc } from 'firebase/firestore';
+import { AuthContext } from './context/auth-provider';
+import { useNavigate } from 'react-router-dom';
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState<any>(null); // Track user data
-  const [role, setRole] = useState<string>(''); // Track the user's role ('player' or 'owner')
+
+  const [role, setRole] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true); // Track loading state for authentication check
+
+  const { user } = useContext(AuthContext);
 
   // Listen to auth state changes and fetch user role
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        setUser(user);
+    if (!user) {
+      setLoading(false);
+      return;
+    }
 
-        // Get user role from Firestore
-        const userDoc = await getDoc(doc(firestore, 'users', user.uid));
-        if (userDoc.exists()) {
-          setRole(userDoc.data().role); // Set role from Firestore data
-        }
-      } else {
-        setUser(null);
-        setRole(''); // Reset role if the user is logged out
+    const fetchUser = async () => await getDoc(doc(firestore, 'users', user.uid));
+    fetchUser().then((userDoc) => {
+      if (userDoc.exists()) {
+        setRole(userDoc.data().role); // Set role from Firestore data
       }
-
-      setLoading(false); // Set loading to false after authentication state is checked
-    });
-
-    // Cleanup the subscription when the component unmounts
-    return () => unsubscribe();
-  }, []);
+      setLoading(false);
+    }).catch((_) => setLoading(false));  
+  }, [user]);
 
   const handleSignIn = () => {
     navigate('/signIn');
@@ -44,7 +39,6 @@ const Header: React.FC = () => {
 
   const handleSignOut = async () => {
     await auth.signOut();
-    navigate('/home'); // Redirect to home after sign out
   };
 
   if (loading) {

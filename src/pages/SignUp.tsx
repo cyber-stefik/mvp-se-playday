@@ -31,6 +31,7 @@ const SignUp: React.FC = () => {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
+            await auth.signOut();
 
             // Add user data to Firestore in the 'users' collection
             await setDoc(doc(firestore, 'users', user.uid), {
