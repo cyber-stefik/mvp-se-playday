@@ -26,7 +26,7 @@ const Header: React.FC = () => {
         setRole(userDoc.data().role); // Set role from Firestore data
       }
       setLoading(false);
-    }).catch((_) => setLoading(false));  
+    }).catch((_) => setLoading(false));
   }, [user]);
 
   const handleSignIn = () => {
@@ -70,7 +70,7 @@ const Header: React.FC = () => {
           About Us
         </a>
 
-        {role === 'owner' ? (
+        {user && role === 'owner' ? (
           <a href="/my-fields" className="hover:text-[#065C64]">
             My Fields
           </a>
@@ -79,11 +79,11 @@ const Header: React.FC = () => {
             Fields
           </a>
         )}
-        {role === 'player' || role !== 'owner' ? (
-          <a href="/games" className="hover:text-[#065C64]">
-            Games
-          </a>
-        ) : null}
+        {user && role === 'owner' ? (
+          <></>
+        ) : <a href="/games" className="hover:text-[#065C64]">
+          Games
+        </a>}
 
         {/* Conditionally render 'My Profile' only if the user is authenticated */}
         {user ? (
