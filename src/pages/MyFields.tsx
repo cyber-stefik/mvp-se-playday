@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { firestore } from '../lib/firebase'; // Update with your Firebase config file path
-import { auth } from '../lib/firebase';
 import { v4 as uuidv4 } from "uuid"; // To generate unique IDs
+import { AuthContext } from "@/components/context/auth-provider";
 
 function MyFields() {
   const [showAddFieldModal, setShowAddFieldModal] = useState(false);
@@ -12,9 +12,9 @@ function MyFields() {
     price: "",
     description: "",
   });
-//   const { user } = auth.currentUser;
+  const { user } = useContext(AuthContext);
 
-//   console.log(user);
+  console.log(user);
 
   const handleAddField = () => setShowAddFieldModal(true);
   const handleCloseModal = () => {
