@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 const Header: React.FC = () => {
   const navigate = useNavigate();
 
-  const [role, setRole] = useState<string>('');
+  const [role, setRole] = useState<"owner" | "player" | ''>('');
   const [loading, setLoading] = useState<boolean>(true); // Track loading state for authentication check
 
   const { user } = useContext(AuthContext);
@@ -70,7 +70,7 @@ const Header: React.FC = () => {
           About Us
         </a>
 
-        {user && role === 'owner' ? (
+        {role === 'owner' ? (
           <a href="/my-fields" className="hover:text-[#065C64]">
             My Fields
           </a>
