@@ -5,7 +5,8 @@ import { collection, doc, setDoc, getDoc, query, where, onSnapshot } from "fireb
 import { firestore } from '../lib/firebase'; // Update with your Firebase config file path
 import { v4 as uuidv4 } from "uuid"; // To generate unique IDs
 import { AuthContext } from "@/components/context/auth-provider";
-
+import { Toaster } from "@/components/ui/toaster";
+import { useToast } from "@/hooks/use-toast";
 
 function MyFields() {
   const [fields, setUserFields] = useState<FieldCardProps[]>([]);
@@ -17,6 +18,7 @@ function MyFields() {
     description: "",
   });
   const [username, setUsername] = useState("");
+  const { toast } = useToast();
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
@@ -70,7 +72,11 @@ function MyFields() {
     e.preventDefault();
 
     if (!fieldData.fieldName || !fieldData.location || !fieldData.price) {
-      alert("Please fill in all required fields.");
+      toast({
+        title: "Please fill in all required fields.",
+        description: "All fields are required to add a new field.",
+        variant: "destructive",
+      });
       return;
     }
 
@@ -86,11 +92,19 @@ function MyFields() {
         createdAt: new Date(),
       });
 
-      alert("Field added successfully!");
+      toast({
+        title: "Field added successfully!",
+        description: "Your new field has been added successfully.",
+        variant: "default"
+      });
       handleCloseModal();
     } catch (error) {
       console.error("Error adding field: ", error);
-      alert("Failed to add the field. Please try again.");
+      toast({
+        title: "Error adding field",
+        description: "An error occurred while adding your new field. Please try again later.",
+        variant: "destructive",
+      });
     }
   };
 
@@ -102,6 +116,7 @@ function MyFields() {
 
   return (
     <div className="flex">
+        <Toaster />
       {/* Sidebar */}
       <div className="w-1/5 p-8" style={{ backgroundColor: "#f8fafc", height: "100vh", overflowY: "auto" }}>
         <div className="flex flex-col items-center">
@@ -122,7 +137,7 @@ function MyFields() {
         <div className="flex flex-col gap-4">
           <hr style={{ border: "none", borderTop: "1px solid #ccc", margin: "10px 0" }} />
           <button className={sidebarButtonClass}>Profile Data</button>
-          <button className={sidebarButtonClass}>My Fields</button>
+          <button className={sidebarButtonClass}>Bookings</button>
           <hr style={{ border: "none", borderTop: "1px solid #ccc", margin: "10px 0" }} />
         </div>
 

@@ -36,6 +36,9 @@ function App() {
             {/* My Fields Page */}
             <Route path="/my-fields" element={<MyFields />} />
 
+            {/* My Fields Page */}
+            <Route path="/my-fields" element={<MyFields />} />
+
             {/* Sign In Page */}
             <Route path="/signIn" element={<SignIn />} />
 
