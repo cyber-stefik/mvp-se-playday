@@ -6,6 +6,7 @@ import Header from './components/Header';
 import AboutPage from './pages/AboutPage';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import MyFields from './pages/MyFields';
 import { AuthProvider } from './components/context/auth-provider';
 
 function App() {
@@ -30,6 +31,9 @@ function App() {
 
             {/* Fields Page */}
             <Route path="/fields" element={<div>Fields Page</div>} />
+
+            {/* My Fields Page */}
+            <Route path="/my-fields" element={<MyFields />} />
 
             {/* Sign In Page */}
             <Route path="/signIn" element={<SignIn />} />
