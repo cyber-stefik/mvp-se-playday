@@ -46,7 +46,7 @@ function App() {
             <Route path="/signUp" element={<SignUp />} />
 
             {/* Fallback for unmatched routes */}
-            <Route path="*" element={<div>404 - Page Not Found</div>} />
+            <Route path="*" element={<AboutPage />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>
