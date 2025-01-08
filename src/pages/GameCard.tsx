@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { doc, Timestamp, updateDoc } from "firebase/firestore";
 import { firestore } from "../lib/firebase";
-import { AuthContext } from "./context/auth-provider";
-import { Button } from "./ui/button";
-import { Card, CardContent, CardTitle } from "./ui/card";
+import { AuthContext } from "../components/context/auth-provider";
+import { Button } from "../components/ui/button";
+import { Card, CardContent, CardTitle } from "../components/ui/card";
 
 export interface Game {
   id: string;

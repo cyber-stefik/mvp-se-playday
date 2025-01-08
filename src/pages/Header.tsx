@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Logo from "./../assets/logo_PlayDay_1.png";
 import { auth, firestore } from '../lib/firebase'; // Import firebase auth and firestore
 import { doc, getDoc } from 'firebase/firestore';
-import { AuthContext } from './context/auth-provider';
+import { AuthContext } from '../components/context/auth-provider';
 import { useNavigate } from 'react-router-dom';
 
 const Header: React.FC = () => {

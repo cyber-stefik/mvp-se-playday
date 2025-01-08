@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import Pic1 from '../assets/pic1.svg';
-import Pic2 from '../assets/pic2.png';
 import Pic3 from '../assets/pic3.png';
 import { useNavigate } from "react-router";
 import { firestore } from '@/lib/firebase';
 import { addDoc, collection } from 'firebase/firestore';
-import Modal from '@/components/modal';
+import Modal from '@/pages/modal';
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();

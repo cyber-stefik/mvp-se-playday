@@ -2,7 +2,7 @@ import './index.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import GamesPage from './pages/GamesPage'; // Import your new GamesPage
-import Header from './components/Header';
+import Header from './pages/Header';
 import AboutPage from './pages/AboutPage';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';

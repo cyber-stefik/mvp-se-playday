@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
-import FieldCard from "@/components/FieldCard";
-import { FieldCardProps } from "@/components/FieldCard";
+import FieldCard from "@/pages/FieldCard";
+import { FieldCardProps } from "@/pages/FieldCard";
 import { collection, doc, setDoc, getDoc, query, where, onSnapshot } from "firebase/firestore";
 import { firestore } from '../lib/firebase'; // Update with your Firebase config file path
 import { v4 as uuidv4 } from "uuid"; // To generate unique IDs
