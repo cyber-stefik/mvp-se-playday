@@ -9,6 +9,7 @@ import SignUp from './pages/SignUp';
 import MyFields from './pages/MyFields';
 import { AuthProvider } from './components/context/auth-provider';
 import { FieldsPage } from './pages/FieldsPage';
+import Bookings from './pages/Bookings';
 
 function App() {
   return (
@@ -44,6 +45,9 @@ function App() {
 
             {/* Sign Up Page */}
             <Route path="/signUp" element={<SignUp />} />
+
+            {/* Bookings Page */}
+            <Route path="/bookings" element={<Bookings />} />
 
             {/* Fallback for unmatched routes */}
             <Route path="*" element={<AboutPage />} />

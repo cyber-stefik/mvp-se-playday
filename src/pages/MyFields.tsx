@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from "uuid"; // To generate unique IDs
 import { AuthContext } from "@/components/context/auth-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 function MyFields() {
   const [fields, setUserFields] = useState<FieldCardProps[]>([]);
@@ -20,6 +21,7 @@ function MyFields() {
   const [username, setUsername] = useState("");
   const { toast } = useToast();
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
@@ -59,6 +61,9 @@ function MyFields() {
   }, [user]);
 
   const handleAddField = () => setShowAddFieldModal(true);
+  const handleBookings = () => {
+    navigate("/bookings");
+  }
   const handleCloseModal = () => {
     setShowAddFieldModal(false);
     setFieldData({ fieldName: "", location: "", price: "", description: "" });
@@ -137,7 +142,7 @@ function MyFields() {
         <div className="flex flex-col gap-4">
           <hr style={{ border: "none", borderTop: "1px solid #ccc", margin: "10px 0" }} />
           <button className={sidebarButtonClass}>Profile Data</button>
-          <button className={sidebarButtonClass}>Bookings</button>
+          <button className={sidebarButtonClass} onClick={handleBookings}>Bookings</button>
           <hr style={{ border: "none", borderTop: "1px solid #ccc", margin: "10px 0" }} />
         </div>
 
